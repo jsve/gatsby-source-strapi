@@ -24,7 +24,7 @@ exports.sourceNodes = async (
     loginData.password.length !== 0
   ) {
     const authenticationActivity = reporter.activityTimer(
-      `Authenticate Strapi User`
+      `Authenticate Strapi Blog User`
     )
     authenticationActivity.start()
 
@@ -45,23 +45,25 @@ exports.sourceNodes = async (
     authenticationActivity.end()
   }
 
-  const fetchActivity = reporter.activityTimer(`Fetched Strapi Data`)
+  const fetchActivity = reporter.activityTimer(`Fetched Strapi Blog Data`)
   fetchActivity.start()
 
   // Generate a list of promises based on the `contentTypes` option.
-  const promises = contentTypes.map(contentType =>
-    fetchData({
+  const promises = contentTypes.map(contentType => {
+    console.log(`fetching ${contentType}`)
+
+    return fetchData({
       apiURL,
       contentType,
       jwtToken,
       queryLimit,
       reporter,
     })
-  )
+  })
 
   // Execute the promises.
   let entities = await Promise.all(promises)
-
+  console.log('fetched content types for blog')
   entities = await normalize.downloadMediaFiles({
     entities,
     apiURL,
@@ -71,6 +73,8 @@ exports.sourceNodes = async (
     touchNode,
     jwtToken,
   })
+
+  console.log('got media for blog!')
 
   contentTypes.forEach((contentType, i) => {
     const items = entities[i]

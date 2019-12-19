@@ -28,7 +28,7 @@ var _createNodeHelpers = (0, _gatsbyNodeHelpers2.default)({
 
 var Node = exports.Node = function Node(type, node) {
   return createNodeFactory(type, function (node) {
-    node.id = type + '_' + node.strapiId;
+    node.id = 'Blog' + type + '_' + node.strapiBlogId;
     return node;
   })(node);
 };

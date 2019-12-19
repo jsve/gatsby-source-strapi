@@ -117,9 +117,7 @@ exports.sourceNodes = function () {
 
           case 22:
             entities = _context.sent;
-
-            console.log('fetched content types for blog');
-            _context.next = 26;
+            _context.next = 25;
             return _normalize2.default.downloadMediaFiles({
               entities: entities,
               apiURL: apiURL,
@@ -130,11 +128,9 @@ exports.sourceNodes = function () {
               jwtToken: jwtToken
             });
 
-          case 26:
+          case 25:
             entities = _context.sent;
 
-
-            console.log('got media for blog!');
 
             contentTypes.forEach(function (contentType, i) {
               var items = entities[i];
@@ -146,7 +142,7 @@ exports.sourceNodes = function () {
 
             fetchActivity.end();
 
-          case 30:
+          case 28:
           case 'end':
             return _context.stop();
         }

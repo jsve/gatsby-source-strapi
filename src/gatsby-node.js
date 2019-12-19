@@ -63,7 +63,7 @@ exports.sourceNodes = async (
 
   // Execute the promises.
   let entities = await Promise.all(promises)
-  console.log('fetched content types for blog')
+
   entities = await normalize.downloadMediaFiles({
     entities,
     apiURL,
@@ -73,8 +73,6 @@ exports.sourceNodes = async (
     touchNode,
     jwtToken,
   })
-
-  console.log('got media for blog!')
 
   contentTypes.forEach((contentType, i) => {
     const items = entities[i]

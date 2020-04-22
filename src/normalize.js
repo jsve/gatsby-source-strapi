@@ -29,7 +29,7 @@ const extractFields = async (
 
         // If we have cached media data and it wasn't modified, reuse
         // previously created file node to not try to redownload
-        if (cacheMediaData && field.updatedAt === cacheMediaData.updatedAt) {
+        if (cacheMediaData && field.updated_at === cacheMediaData.updated_at) {
           fileNodeID = cacheMediaData.fileNodeID
           touchNode({ nodeId: cacheMediaData.fileNodeID })
         }
@@ -55,7 +55,7 @@ const extractFields = async (
 
               await cache.set(mediaDataCacheKey, {
                 fileNodeID,
-                modified: field.updatedAt,
+                updated_at: field.updated_at,
               })
             }
           } catch (e) {
@@ -65,6 +65,8 @@ const extractFields = async (
         if (fileNodeID) {
           item[`${key}___NODE`] = fileNodeID
         }
+      } else if (field !== null && typeof field === 'object') {
+        extractFields(apiURL, store, cache, createNode, touchNode, auth, field)
       }
     }
   }

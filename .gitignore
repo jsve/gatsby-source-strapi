@@ -4,5 +4,6 @@
 # /nodes.js
 # /normalize.js
 # /yarn.lock
+# /authentication.js
 node_modules
 .idea
